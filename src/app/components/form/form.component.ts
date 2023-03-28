@@ -13,6 +13,6 @@ export class FormComponent implements OnInit{
   private apiService = inject(ApiService);
   chatCompletion$!: any;
   ngOnInit(): void {
-    this.chatCompletion$ = this.apiService.generateResponse()
+    this.chatCompletion$ = this.apiService.generateResponse('Que es angular?')
   }
 }

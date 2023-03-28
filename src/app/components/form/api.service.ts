@@ -10,16 +10,18 @@ export class ApiService {
   private httpClient = inject(HttpClient);
   private apiUrl = environment.API_HOST;
   constructor() { }
-  generateResponse(): Observable<any>{
+
+  generateResponse(prompt: string): Observable<any>{
     const requestBody = {
       "model": "gpt-3.5-turbo",
-      "messages": [{"role": "user", "content": "Hello!"}]
+      "messages": [{"role": "user", "content": prompt}]
     }
-    const headers = {
-      'Content-type': 'application/json',
-      Authorization:   `Bearer ${environment.API_KEY}`
+    const options = {
+      headers : {
+        'Content-type': 'application/json',
+        Authorization:   `Bearer ${environment.API_KEY}`
+      }
     }
-    const options = {}
 
     return this.httpClient.post<any>(this.apiUrl, requestBody, options)
   }
