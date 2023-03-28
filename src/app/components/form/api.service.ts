@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http'
 })
 export class ApiService {
   private httpClient = inject(HttpClient);
+  private apiUrl = environment.API_HOST;
   constructor() { }
   generateResponse(): Observable<any>{
     const requestBody = {
@@ -18,5 +19,8 @@ export class ApiService {
       'Content-type': 'application/json',
       Authorization:   `Bearer ${environment.API_KEY}`
     }
+    const options = {}
+
+    return this.httpClient.post<any>(this.apiUrl, requestBody, options)
   }
 }
